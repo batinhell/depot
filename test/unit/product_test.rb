@@ -41,4 +41,17 @@ class ProductTest < ActiveSupport::TestCase
       assert_equal "has already been taken", product.errors[:title].join('; ')
   end
 
+  test "product title must be at least 5 characters" do 
+    product = Product.new(price: 2,
+                          description: "yyy",
+                          image_url: "zzz.jpg")
+    product.title = "Ruby"
+    assert product.invalid?
+    assert_equal "more then 5 if you don't mind",
+    product.errors[:title].join('; ')
+
+    product.title = "Ruby language"
+    assert product.valid?
+  end
+
 end
