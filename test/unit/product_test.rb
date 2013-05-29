@@ -19,12 +19,12 @@ class ProductTest < ActiveSupport::TestCase
                             image_url:   "zzz.jpg")
       product.price = -1
       assert product.invalid?
-      assert_equal "must be greater than or equal to 0.01", 
+      assert_equal "может иметь лишь значение большее или равное 0.01", 
       product.errors[:price].join('; ')
 
       product.price = 0
       assert product.invalid?
-      assert_equal "must be greater than or equal to 0.01", 
+      assert_equal "может иметь лишь значение большее или равное 0.01", 
       product.errors[:price].join('; ')
 
       product.price = 1
@@ -38,7 +38,7 @@ class ProductTest < ActiveSupport::TestCase
           price: 32.98
       )
       assert !product.save
-      assert_equal "has already been taken", product.errors[:title].join('; ')
+      assert_equal "уже существует", product.errors[:title].join('; ')
   end
 
   test "product title must be at least 5 characters" do 
