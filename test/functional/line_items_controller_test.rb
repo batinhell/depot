@@ -3,6 +3,7 @@ require 'test_helper'
 class LineItemsControllerTest < ActionController::TestCase
   setup do
     @line_item = line_items(:one)
+    @cart = carts(:one)
   end
 
   test "should get index" do
@@ -44,6 +45,16 @@ class LineItemsControllerTest < ActionController::TestCase
       delete :destroy, id: @line_item
     end
 
-    assert_redirected_to line_items_path
+    assert_redirected_to cart_path(@cart.id)
+  end
+
+  test "should redirect to store_url if cart is empty" do
+    assert_difference('LineItem.count', -2) do
+      delete :destroy, id: @line_item
+      delete :destroy, id: line_items(:two)
+    end
+
+    assert_equal 0, LineItem.count
+    assert_redirected_to store_url
   end
 end

@@ -79,8 +79,11 @@ class LineItemsController < ApplicationController
     @line_item.destroy
 
     respond_to do |format|
-      format.html { redirect_to cart_path(@line_item.cart) }
-      format.json { head :no_content }
+      if LineItem.find_by_cart_id(@line_item.cart_id).nil? 
+        format.html { redirect_to store_url }
+      else
+        format.html { redirect_to @line_item.cart }
+      end
     end
   end
 end
