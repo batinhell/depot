@@ -56,7 +56,7 @@ class LineItemsControllerTest < ActionController::TestCase
       delete :destroy, id: @line_item
     end
 
-    assert_redirected_to cart_path(@cart.id)
+    assert_redirected_to store_url
   end
 
   test "should redirect to store_url if cart is empty" do

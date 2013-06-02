@@ -5,6 +5,7 @@ class Product < ActiveRecord::Base
   validates :title, uniqueness: true
   validates_length_of :title, :minimum => 5, :message => "more then 5 if you don't mind"
   has_many :line_items
+  has_many :orders, through: :line_items
   before_destroy :ensure_not_referenced_by_any_line_item
 
   private
