@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+skip_before_filter :authorize, only: [:new, :create]
+
   # GET /orders
   # GET /orders.json
   def index
@@ -68,7 +70,7 @@ class OrdersController < ApplicationController
   # PUT /orders/1.json
   def update
     @order = Order.find(params[:id])
-    ship_date_changed = @order.ship_date.changed?
+    ship_date_changed = @order.ship_date.changed? unless @order.present?
     respond_to do |format|
       if @order.update_attributes(params[:order])
         OrderNotifier.shipped(@order).deliver if ship_date_changed

@@ -1,7 +1,16 @@
 Depot::Application.routes.draw do
   
-  resources :orders
+  get "admin" => "admin#index"
 
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create
+    delete 'logout' => :destroy
+  end
+
+  resources :users
+
+  resources :orders
 
   resources :line_items do
     post 'decrement', on: :member
