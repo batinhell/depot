@@ -39,4 +39,6 @@ Depot::Application.configure do
   config.logger = Logger.new(STDOUT)
   config.logger.level = Logger.const_get('DEBUG')
 
+  config.action_mailer.delivery_method = :smtp
+
 end
