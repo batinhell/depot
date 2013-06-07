@@ -1,0 +1,25 @@
+// Place all the styles related to the Categories controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.span2 {
+  .cat-title {
+    h2 {
+      font-size: 14px;
+      color: black;
+      font-weight: bold;
+      display: block;
+      text-align: left;
+      margin: 0px;
+    }
+  }
+  .cat-items {
+
+    li {
+      list-style: none;
+    }
+    li a {
+      text-decoration: none;
+      border-bottom: 1px dotted #0068a3;
+    }
+  }
+}

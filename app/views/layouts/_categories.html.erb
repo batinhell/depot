@@ -1,0 +1,26 @@
+<% @categories = Category.where(:parent_id => nil) %>
+<% @categories.each do |category| %>
+  <div class="cat-title"><h2><%= category.name %></h2></div>
+  <div class="cat-items">
+    <ul>
+      <% @subcategories = category.subcategories %>
+      <% unless @subcategories.empty? %>
+        <% @subcategories.each do |subcategory| %>
+          <li>
+            <%= link_to subcategory.name, category_path(subcategory) %>
+            <ul id="<%= subcategory.id %>" style="display:none">
+              <% @endsubcategories = subcategory.subcategories %>
+              <% unless @subcategories.empty? %>
+                <% @endsubcategories.each do |endsubcategory| %>
+                  <li>
+                    <%= link_to endsubcategory.name, category_path(endsubcategory) %>
+                  </li>
+                <% end %>
+              <% end %>  
+            </ul>
+          </li>
+        <% end %>
+      <% end %>    
+    </ul>
+  </div>
+<% end %>
