@@ -1,41 +1,42 @@
+
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Pragprog Books Online Store</title>
-  <%= stylesheet_link_tag "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tag %>
-</head>
-<body class="<%= controller.controller_name %>">
-  <div id="banner">
-    <%= link_to(image_tag("logo.png"), "/") %>
-    <%= @page_title || "Pragmatic Bookshelf" %>
-  </div>
-  <div id="columns">
-    <div id="side">
-      <% if @cart %>
-        <%= hidden_div_if(@cart.line_items.empty?, id: "cart") do %>
-          <%= render @cart %>
-        <% end %>
-      <% end %>  
-      <ul>
-        <li><a href="http://www....">Home</a></li>
-        <li><a href="http://www..../faq">Questions</a></li>
-        <li><a href="http://www..../news">News</a></li>
-        <li><a href="http://www..../contact">Contact</a></li>
-      </ul>
-      <% if session[:user_id] %>
-        <ul>
-          <li><%= link_to 'Orders',   orders_path   %></li>
-          <li><%= link_to 'Products', products_path %></li>
-          <li><%= link_to 'Users',    users_path    %></li>
-        </ul>
-        <%= button_to 'Logout', logout_path, method: :delete   %>
-      <% end %>
-    </div>
-    <div id="main">
-      <%= yield %>
-    </div>
-  </div>
-</body>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Запчасти для сотовых телефонов" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Amatradk" %>">
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <%= yield(:head) %>
+  </head>
+  <body class="<%= controller.controller_name %>">
+    <header class="navbar navbar-fixed-top">
+      <nav class="navbar-inner">
+        <div class="container">
+           <%= render 'layouts/navigation' %>
+        </div>
+      </nav>
+    </header>
+    <div id="main" role="main">
+      <div class="container-fluid">
+        <div class="content">
+           <div class="row-fluid">
+            <div class="span3">
+              <%= render 'layouts/cartmain' %>
+            </div>
+            <div class="span6">
+              <%= render 'layouts/messages' %>
+              <%= yield %>
+            </div>
+            <div class="span3">
+              Takie dela
+            </div>
+          </div>
+          <footer>
+          </footer>
+        </div>
+      </div> <!--! end of .container -->
+    </div> <!--! end of #main -->
+  </body>
 </html>

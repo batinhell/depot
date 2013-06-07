@@ -14,3 +14,4 @@
 //= require jquery_ujs
 //= require jquery.color.js
 //= require_tree .
+//= require bootstrap
